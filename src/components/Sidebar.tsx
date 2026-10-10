@@ -25,7 +25,7 @@ interface SidebarProps {
   activeTab: string;
   onNavigate: (tab: string, param?: string) => void;
   currentUser: User;
-  onRoleSwitch: (role: 'student' | 'admin') => void;
+  onRoleSwitch: (role: 'student' | 'super_admin') => void;
   collapsed?: boolean;
 }
 
@@ -146,7 +146,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <button
-          onClick={() => onRoleSwitch(currentUser.role === 'admin' ? 'student' : 'admin')}
+          onClick={() => onRoleSwitch(currentUser.role === 'super_admin' ? 'student' : 'super_admin')}
           title="Switch Demo Role"
           className="p-1 rounded text-slate-400 hover:text-[#C9A45C] hover:bg-[#25344A]/60 transition-colors"
         >

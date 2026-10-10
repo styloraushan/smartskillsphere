@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Search, Bell, ShieldCheck, Flame, BookOpen } from 'lucide-react';
+import { Search, Bell, ShieldCheck, Flame, BookOpen, Menu } from 'lucide-react';
 import { User } from '../types';
 
 interface TopHeaderProps {
   currentUser: User;
   onNavigate: (tab: string, param?: string) => void;
   onSearch?: (query: string) => void;
-  onRoleSwitch: (role: 'student' | 'admin') => void;
+  onRoleSwitch: (role: 'student' | 'super_admin') => void;
+  onMenuToggle?: () => void;
   title?: string;
 }
 
@@ -15,6 +16,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   onNavigate,
   onSearch,
   onRoleSwitch,
+  onMenuToggle,
   title,
 }) => {
   const [searchVal, setSearchVal] = useState('');
@@ -29,16 +31,24 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   };
 
   return (
-    <header className="h-16 bg-[#111214] text-white border-b border-[#25344A] px-4 sm:px-6 flex items-center justify-between gap-4 sticky top-0 z-30 shrink-0">
+    <header className="h-16 bg-[#111214] text-white border-b border-[#25344A] px-3 sm:px-6 flex items-center justify-between gap-3 sm:gap-4 sticky top-0 z-30 shrink-0">
       {/* Title / Search */}
-      <div className="flex items-center gap-4 flex-1 max-w-xl">
+      <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0 max-w-xl">
+        <button
+          type="button"
+          onClick={onMenuToggle}
+          className="lg:hidden p-2 -ml-1 text-slate-300 hover:text-white hover:bg-[#25344A]/60 rounded transition-colors"
+          aria-label="Open navigation menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
         {title ? (
           <h2 className="text-sm sm:text-base font-bold text-white font-display truncate hidden sm:block">
             {title}
           </h2>
         ) : null}
 
-        <form onSubmit={handleSearchSubmit} className="relative flex-1">
+        <form onSubmit={handleSearchSubmit} className="relative flex-1 min-w-0">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -51,7 +61,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
       </div>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         {/* Streak indicator */}
         <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded text-amber-400 text-xs font-semibold">
           <Flame className="w-3.5 h-3.5 text-amber-500" fill="#f59e0b" />

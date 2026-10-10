@@ -15,6 +15,7 @@
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background-color: #F5F7FA;
     color: #25344A;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -24,6 +25,11 @@
   .font-mono, .tabular-nums {
     font-family: 'JetBrains Mono', monospace;
   }
+}
+
+/* Avoid horizontal page overflow from long labels and rich learning content on small screens. */
+#root {
+  min-width: 0;
 }
 
 /* Custom scrollbar */

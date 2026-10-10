@@ -63,9 +63,10 @@ export default function App() {
 
   const [currentUser, setCurrentUser] = useState<User | null>(() => authService.getStoredUser());
   const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup'>('login');
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup' | 'admin_login'>('login');
   const [activeTab, setActiveTab] = useState<string>('home');
   const [searchParam, setSearchParam] = useState<string>('');
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const effectiveUser: User = currentUser || authService.getAllUsers()[0];
 
@@ -109,13 +110,13 @@ export default function App() {
     }
   };
 
-  const handleRoleSwitch = (newRole: 'student' | 'admin') => {
+  const handleRoleSwitch = (newRole: 'student' | 'super_admin') => {
     const user = authService.switchRole(newRole);
     setCurrentUser(user);
     refreshAllData();
   };
 
-  const handleOpenAuth = (mode: 'login' | 'signup' = 'login') => {
+  const handleOpenAuth = (mode: 'login' | 'signup' | 'admin_login' = 'login') => {
     setAuthModalMode(mode);
     setAuthModalOpen(true);
   };
@@ -137,6 +138,7 @@ export default function App() {
       return;
     }
     setActiveTab(tab);
+    setMobileSidebarOpen(false);
     if (param) setSearchParam(param);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -229,13 +231,36 @@ export default function App() {
         </div>
       ) : (
         /* Inner Learning Portal Experience with Sidebar (Screens 2-20) */
-        <div className="flex-1 flex w-full">
-          <Sidebar
-            activeTab={activeTab}
-            onNavigate={handleNavigate}
-            currentUser={effectiveUser}
-            onRoleSwitch={handleRoleSwitch}
-          />
+        <div className="flex-1 flex w-full min-w-0">
+          {/* The persistent navigation is reserved for desktop widths. */}
+          <div className="hidden lg:flex shrink-0">
+            <Sidebar
+              activeTab={activeTab}
+              onNavigate={handleNavigate}
+              currentUser={effectiveUser}
+              onRoleSwitch={handleRoleSwitch}
+            />
+          </div>
+
+          {/* On phones and tablets, navigation becomes an overlay so it never squeezes the lesson content. */}
+          {mobileSidebarOpen && (
+            <div className="lg:hidden fixed inset-0 z-50 flex">
+              <button
+                type="button"
+                aria-label="Close navigation menu"
+                className="absolute inset-0 bg-black/60 backdrop-blur-[1px]"
+                onClick={() => setMobileSidebarOpen(false)}
+              />
+              <div className="relative z-10 h-full w-[min(18rem,86vw)] shadow-2xl">
+                <Sidebar
+                  activeTab={activeTab}
+                  onNavigate={handleNavigate}
+                  currentUser={effectiveUser}
+                  onRoleSwitch={handleRoleSwitch}
+                />
+              </div>
+            </div>
+          )}
 
           <div className="flex-1 flex flex-col min-w-0 bg-[#F5F7FA]">
             <TopHeader
@@ -243,9 +268,10 @@ export default function App() {
               onNavigate={handleNavigate}
               onSearch={(query) => handleNavigate('resources', query)}
               onRoleSwitch={handleRoleSwitch}
+              onMenuToggle={() => setMobileSidebarOpen(true)}
             />
 
-            <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+            <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 overflow-x-hidden">
               {/* Screen 2: Notes & Resources */}
               {activeTab === 'resources' && (
                 <ResourcesView
@@ -312,7 +338,7 @@ export default function App() {
               <PollsView
                 polls={polls}
                 onPollVoted={refreshAllData}
-                isAdmin={effectiveUser.role === 'admin'}
+                isAdmin={effectiveUser.role === 'super_admin'}
               />
             )}
 
