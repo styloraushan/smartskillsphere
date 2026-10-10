@@ -181,21 +181,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           >
             Register
           </button>
-          <button
-            type="button"
-            onClick={() => {
-              setMode('admin_login');
-              setError(null);
-            }}
-            className={`py-2 rounded-lg transition-all flex items-center justify-center gap-1 ${
-              mode === 'admin_login'
-                ? 'bg-rose-500 text-white shadow-md'
-                : 'text-slate-300 hover:text-white'
-            }`}
-          >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Super Admin</span>
-          </button>
+         
         </div>
 
         {/* Error notification */}
