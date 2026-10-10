@@ -137,8 +137,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 {mode === 'admin_login'
                   ? 'Super Admin Portal Authentication'
                   : mode === 'signup'
-                  ? 'Student Portal Registration (/register)'
-                  : 'Student Authentication Portal (/login)'}
+                  ? 'Student Portal Registration'
+                  : 'Student Authentication Portal'}
               </p>
             </div>
           </div>
@@ -256,10 +256,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* TAB 2: STUDENT REGISTRATION (/register - STRICTLY ASSIGNS STUDENT ROLE) */}
           {mode === 'signup' && (
             <form onSubmit={handleStudentSignUp} className="space-y-3.5">
-              <div className="p-2.5 rounded-xl bg-[#D5A94F]/10 border border-[#D5A94F]/30 text-[#D5A94F] text-[11px] flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 shrink-0" />
-             
-              </div>
+            
 
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1.5">
@@ -319,56 +316,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </form>
           )}
 
-          {/* TAB 3: SUPER ADMIN LOGIN (/admin/login) */}
-          {mode === 'admin_login' && (
-            <form onSubmit={handleSuperAdminLogin} className="space-y-3.5">
-              <div className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-300 text-[11px] flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 shrink-0 text-rose-400" />
-                <span>Restricted Portal: Super Admin seeder authorization required.</span>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                  Super Admin Email
-                </label>
-                <div className="relative">
-                  <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@smartskillsphere.com"
-                    className="w-full bg-[#142536] border border-rose-500/50 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                  Security Key / Password
-                </label>
-                <div className="relative">
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••••••"
-                    className="w-full bg-[#142536] border border-rose-500/50 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-2.5 bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md active:scale-98 disabled:opacity-50"
-              >
-                {loading ? 'Verifying Super Admin Authorization...' : 'Sign In to Super Admin Dashboard'}
-              </button>
-            </form>
-          )}
-
+         
           {/* GUEST OPTION & QUICK DEMO LOGINS */}
           <div className="pt-3 border-t border-slate-800 space-y-2.5">
             {/* Continue as Guest Button */}
@@ -378,7 +326,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               className="w-full py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2"
             >
               <UserCheck className="w-4 h-4 text-[#D5A94F]" />
-              <span>Continue as Guest (Browse public notes & drills)</span>
+              <span>Continue as Guest </span>
             </button>
 
                      </div>
