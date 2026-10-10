@@ -402,36 +402,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <span>Continue as Guest (Browse public notes & drills)</span>
             </button>
 
-            <span className="text-[11px] font-semibold text-[#AAB4C2] uppercase tracking-wider block text-center pt-1">
-              Authorized 1-Click Role Logins
-            </span>
-
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <button
-                type="button"
-                onClick={() => handleQuickLogin('inforaushan03@gmail.com', false)}
-                className="p-2 rounded-xl bg-[#142536] hover:bg-[#1f3750] border border-slate-700/80 hover:border-[#D5A94F] text-left transition-colors flex items-center gap-2 group"
-              >
-                <GraduationCap className="w-4 h-4 text-[#D5A94F] shrink-0" />
-                <div className="truncate">
-                  <div className="font-semibold text-white group-hover:text-[#D5A94F] truncate">Raushan K.</div>
-                  <div className="text-[10px] text-slate-400 font-mono">student</div>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickLogin('admin@smartskillsphere.com', true)}
-                className="p-2 rounded-xl bg-[#142536] hover:bg-[#1f3750] border border-rose-500/40 hover:border-rose-400 text-left transition-colors flex items-center gap-2 group"
-              >
-                <ShieldCheck className="w-4 h-4 text-rose-400 shrink-0" />
-                <div className="truncate">
-                  <div className="font-semibold text-white group-hover:text-rose-400 truncate">Directorate</div>
-                  <div className="text-[10px] text-rose-300 font-mono">super_admin</div>
-                </div>
-              </button>
-            </div>
-          </div>
+                     </div>
         </div>
       </div>
     </div>
