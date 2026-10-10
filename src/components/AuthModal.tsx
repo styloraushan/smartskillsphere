@@ -84,27 +84,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   // Super Admin Login (strictly authorizes super_admin accounts and redirects to /admin/dashboard)
-  const handleSuperAdminLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    if (!email.trim()) {
-      setError('Please provide the authorized super admin email.');
-      return;
-    }
-
-    setLoading(true);
-    setTimeout(() => {
-      const res = authService.loginSuperAdmin(email.trim());
-      setLoading(false);
-      if (res.success && res.user) {
-        onLoginSuccess(res.user, 'admin');
-        onClose();
-      } else {
-        setError(res.error || '403 Forbidden: Account does not possess super_admin privileges.');
-      }
-    }, 250);
-  };
-
   // Guest Mode
   const handleContinueAsGuest = () => {
     const guestUser = authService.loginGuest();
@@ -279,7 +258,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <form onSubmit={handleStudentSignUp} className="space-y-3.5">
               <div className="p-2.5 rounded-xl bg-[#D5A94F]/10 border border-[#D5A94F]/30 text-[#D5A94F] text-[11px] flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
-                <span>Public registration automatically assigns the Student role.</span>
+             
               </div>
 
               <div>
