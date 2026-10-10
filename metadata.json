@@ -1,0 +1,6 @@
+{
+  "name": "SmartSkillSphere",
+  "description": "SmartSkillSphere — Learn Smart. Practice Daily. Grow Beyond Limits. Comprehensive learning and practice platform for aptitude, reasoning, technical MCQs, curated notes, live quizzes, and polls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
